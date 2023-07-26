@@ -1,0 +1,40 @@
+{% load static %}
+
+
+<div class="footer2">
+  <footer>
+    <div class="animated">
+      <div class="wave" id="wave1"></div>
+      <div class="wave" id="wave2"></div>
+      <div class="wave" id="wave3"></div>
+      <div class="wave" id="wave4"></div>
+      <div class="wave" id="wave5"></div>
+    </div>
+    <ul class="icons">
+      <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+      <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+      <li><a href="https://www.linkedin.com/in/elias-leonel-perez-8098b1284/" target="_blank"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+      <li><a href="https://www.instagram.com/perezelias__/" target="_blank"><ion-icon name="logo-instagram"></ion-icon></a></li>
+    </ul>
+
+    <!-- Colocar los enlaces aquí arriba -->
+    <ul class="footer-links">
+      <li style="display: inline-block;"><a href="{% url 'index' %}">Inicio</a></li>
+      <li style="display: inline-block;"><a href="{% url 'apps.nosotros:nosotros' %}">Acerca de nosotros</a></li>
+      <li style="display: inline-block;"><a href="{% url 'apps.posts:posts' %}">Articulos</a></li>
+      <li style="display: inline-block;"><a href="{% url 'apps.contacto:contacto' %}">Contacto</a></li>
+      {% if user.is_authenticated %}
+          <li style="display: inline-block;"><a href="{% url 'apps.usuario:logout' %}">Cerrar sesión</a></li>
+      {% else %}
+          <li style="display: inline-block;"><a href="{% url 'apps.usuario:registro' %}">Registro</a></li>
+          <li style="display: inline-block;"><a href="{% url 'apps.usuario:login' %}">Iniciar sesión</a></li>
+      {% endif %}
+    </ul>
+    
+    <p>@ Todos los derechos reservados / Mundo IA </p>
+  </footer>
+</div>
+
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

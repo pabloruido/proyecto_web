@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid" style="margin: 200px;">
+    
+    {% for i in posts %}
+
+        <br>
+        <a id="boton_post" href="{% url 'apps.posts:post_individual' i.id %}">
+            Ingresá a este Post</a>
+        <li>{{ i.titulo }}</li>
+        <li>{{ i.subtitulo }}</li>
+        <li>{{ i.categoria }}</li>
+        <br>
+        
+        
+        {% empty %}
+        <h1>No hay registros.</h1>
+
+    {% endfor %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <title>Acerca de Nosotros</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nosotros.css' %}">
+</head>
+<body>
+    <h1>{{ nosotros_info.titulo }}</h1>
+    <p>{{ nosotros_info.descripcion }}</p>
+    {% if nosotros_info.imagen %}
+        <img src="{{ nosotros_info.imagen.url }}" alt="{{ nosotros_info.titulo }}">
+    {% endif %}
+</body>
+{% endblock %}

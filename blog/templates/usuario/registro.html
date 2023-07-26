@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+<!-- se extiende el base.html que es lo que se muestra en todas las paginas -->
+{% load static %} 
+<!-- se cargan los archivos estaticos -->
+
+{% block content %}
+<center>
+    <form method="POST" enctype="mulpipart/form-data" style="margin-top: 300px; margin-bottom: 100px;">
+    <h1 class="h1">Registro de usuarios</h1>
+    <br>
+    <div class="messages">
+        {% for message in messages %}
+            <table{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</table>
+        {% endfor %}
+    </div>
+    <br>
+    {% csrf_token %}
+    <div class="container-flud">
+        <table>{{ form }}</table>
+    </div>
+    <br><br>
+    <button type="submit" class="btn btn-success btn-lg px-3">Registrar</button>
+</form>
+
+</center>
+{% endblock %}

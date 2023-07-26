@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+<!-- se extiende el base.html que es lo que se muestra en todas las paginas -->
+{% load static %} 
+<!-- se cargan los archivos estaticos -->
+
+{% block content %}
+<center>
+
+    <form method="POST" style="margin-top: 300px;">
+    <h1 class="h1">Iniciar sesión</h1>
+    <br>
+    <div class="messages">
+        {% for message in messages %}
+            <table{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</table>
+        {% endfor %}
+    </div>
+    <br>
+    {% csrf_token %}
+    <div class="container">
+        <table>{{ form }}</table>
+        <br>
+        <a style="color:black;" href="{% url 'apps.usuario:registro' %}">Se encuentra registado? Puede registrarse aqui</a>
+        <br><br>
+        <button type="submit" class="btn btn-success btn-lg px-3">Inciar sesión</button>
+        <a style="color:black;" href="{% url 'apps.usuario:password_reset' %}">Restablecer contraseña</a>
+        <br><br>
+    </div>
+</form>
+
+</center>
+{% endblock %}
