@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+<!-- se extiende el base.html que es lo que se muestra en todas las paginas -->
+{% load static %} 
+<!-- se cargan los archivos estaticos -->
+
+{% block content %}
+<div class="form12" style="margin-top: 60px">   
+    <div class="box2" >
+        <form method="POST" enctype="mulpipart/form-data" class="my-form" >
+            <h2 class="h1" style="margin-top: -20px;">Registro de usuarios</h2>
+            
+            {% csrf_token %}
+            <div class="text-white container-flud">
+                <table class="text-white">{{ form }}</table>
+            </div>
+            <br><br>
+            <button type="submit" class="btn btn-success btn-lg px-3">Registrar</button>
+        </form>
+    </div>
+
+ </div>
+{% endblock %}

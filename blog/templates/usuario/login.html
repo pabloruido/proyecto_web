@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static %} 
+
+
+{% block content %}
+<center>
+<div class="form1">
+    <div class="box">
+    <form method="POST" >
+            <h2 class="h1 text-white" >Iniciar sesión</h2>
+ 
+
+    
+    {% csrf_token %}
+    <div class="container text-white">
+        <table class="text-white">{{ form }}</table>
+        <br>
+        <a style="color:white; text-decoration:none" href="{% url 'apps.usuario:registro' %}">Se encuentra registado? Puede registrarse aqui</a>
+        <br><br>
+        <button type="submit" class="btn btn-success btn-lg px-3">Inciar sesión</button>
+        <br>
+        <a style="color:white; text-decoration:none" href="{% url 'apps.usuario:password_reset' %}">Restablecer contraseña</a>
+        <br><br>
+    </div>
+        </form>
+
+</center>
+{% endblock %}

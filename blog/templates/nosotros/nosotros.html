@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+    <title>Acerca de Nosotros</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nosotros.css' %}">
+</head>
+<body>
+    <section class="sec-1 show-animate">
+    <div class="section1 parrafo" style="margin-top: 150px">
+    <h1>{{ nosotros_info.titulo }}</h1>
+    <p>{{ nosotros_info.descripcion }}</p>
+    {% if nosotros_info.imagen %}
+        <img src="{{ nosotros_info.imagen.url }}" alt="{{ nosotros_info.titulo }}">
+    {% endif %}
+</div>
+</section>
+</body>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/posts.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="filters" >
+    <a class="btn btn-outline-info" href="?categoria=">Todas las categorías</a>
+    {% for categoria in categorias %}
+        
+<a class="btn btn-outline-danger" href="?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>{% endfor %}
+
+    
+<a class="btn btn-outline-danger" href="?antiguedad=asc">Más antiguas primero</a>
+<a class="btn btn-outline-warning" href="?antiguedad=desc">Más recientes primero</a>
+
+<a class="btn btn-outline-success" href="?alfabetico=asc">A-Z</a>
+<a class="btn btn-outline-light" href="?alfabetico=desc">Z-A</a>
+
+</div>
+<div class="content-wrapper">
+<div class="container posts-container" style="margin-bottom:100px">
+    {% for i in posts %}
+    <div class="post-item">
+        <img class="img-post" src="{{ i.imagen.url}}"alt="">
+        <a style="color:white; text-decoration:none"href="{% url 'apps.posts:post_individual' i.id %}">
+            <h1>{{ i.titulo }}</h1>
+        </a>
+        </a>
+        <li class="text-white">{{ i.titulo }}</li>
+        <li class="text-white">{{ i.subtitulo }}</li>
+        <li class="text-white"><a style="color:white; text-decoration:none" href="?categoria={{ i.categoria.id }}">{{ i.categoria }}</a></li>
+        <li><a style="color:white;" href="{% url 'apps.posts:post_individual' i.id %}">Ir al Artículo</a></li>
+    </div>
+    
+    {% empty %}
+        <h1 class="text-white">No hay registros.</h1>
+    {% endfor %}
+    {% if puede_crear_post %}
+    <div>
+      <a href="{% url 'apps.posts:crear_post' %}" class="btn btn-primary"
+        >Crear Nuevo Post</a>
+    </div>
+    {% endif %}
+</div>
+</div>
+
+{% endblock %}

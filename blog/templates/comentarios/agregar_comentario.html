@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Deja tu comentario</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar comentario</button>
+  </form>
+  <a href="{% url 'apps.posts:post_individual' id=post_id %}">Volver al post</a>
+{% endblock %}

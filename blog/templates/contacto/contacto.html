@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="form14">
+  <div class="box14">
+    <form method="POST" style="margin-top: 10px">
+      <h2>Formulario de contacto</h2>
+      <br />
+      {% if messages %} {% for message in messages %}
+      <div class="message {{ message.tags }} " style="margin:10px;">{{ message }}</div>
+      {% endfor %} {% endif %}
+      <table class="text-white">
+        {% csrf_token %} {{ form }}
+      </table>
+      <input type="submit" class="btn btn-success btn-lg px-0" style="margin-top:50px; box-shadow: 0 5px 10px #00ff88;" value="Enviar" />
+    </form>
+  </div>
+</div>
+
+{% endblock %}

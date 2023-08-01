@@ -1,0 +1,73 @@
+{% extends 'base.html'%} {% load static %} {% block content %}
+
+<div class="container-btn">
+  <a class="neon-btn" href="#section">
+    <span class="neon-text">
+      INTELIGENCI<span class="faulty-letter">A <br /></span
+      >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ARTIFICIAL
+    </span>
+  </a>
+</div>
+
+<div id="section" class="Contenedor">
+  <div class="card1">
+    <div class="face front">
+      <img src="{% static "img/Home-1.jpg"%}" alt="">
+      <h3>CHAT GPT</h3>
+    </div>
+    <div class="face back">
+      <h3>CHAT GPT</h3>
+      <p>
+        ChatGPT es un modelo de lenguaje desarrollado por OpenAI basado en la arquitectura GPT-3.5. Es uno de los sistemas de inteligencia artificial más avanzados en la generación de texto. Utiliza el aprendizaje profundo para comprender y producir lenguaje humano de manera coherente y contextualmente relevante.
+      </p>
+      <div class="link">
+        <a href={% url 'apps.posts:posts' %}>Más información</a>
+      </div>
+    </div>
+  </div>
+  <div class="card1">
+    <div class="face front">
+      <img src="{% static "img/Home-2.jpg"%}" alt="">
+      <h3>AUTO GPT</h3>
+    </div>
+    <div class="face back">
+      <h3>AUTO GPT</h3>
+      <p>
+        Hay desarrolladores que están trabajando ya en modelos más autónomos y que sean capaces de realizar varias acciones consecutivas por sí mismos sin esperar a la interacción humana, y uno de ellos está causando verdadera expectación (y un poco de terror) en internet. Su nombre es Auto-GPT.
+      </p>
+      <div class="link">
+        <a href={% url 'apps.posts:posts' %}>Más información</a>
+      </div>
+    </div>
+  </div>
+  <div class="card1">
+    <div class="face front">
+      <img src="{% static "img/Home-3.jpg"%}" alt="">
+      <h3>BING IA</h3>
+    </div>
+    <div class="face back">
+      <h3>BING IA</h3>
+      <p>
+        Bing es el nombre del buscador de Microsoft, que es la alternativa a Google creada ya hace muchos años por la empresa desarrolladora de Windows. Siempre ha estado bastante en segundo plano al no poder conseguir unos resultados tan afinados como Google, aunque tiene funciones interesantes y en algunos puntos concretos puede ser mejor que la competencia.
+      </p>
+      <div class="link">
+        <a href={% url 'apps.posts:posts' %}>Más información</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section1">
+  <div class="parrafo">
+    <h1>Inteligencia Artificial</h1>
+    <p>
+      Corre el año 2300 y la humanidad ha alcanzado niveles de progreso inimaginables gracias al avance de la inteligencia artificial (IA). A lo largo de los siglos, la tecnología se ha convertido en el cimiento de la sociedad, asumiendo tareas que antes eran impensables para los seres humanos. Sin embargo, con cada logro, la humanidad se ha enfrentado a nuevas interrogantes y desafíos.
+      En este mundo del futuro, la IA es omnipresente, desde los hogares hasta las ciudades, y ha permitido a la humanidad concentrarse en el desarrollo de su creatividad y habilidades intelectuales. La mayoría de las tareas mundanas son realizadas por máquinas inteligentes, lo que ha liberado tiempo para que las personas se dediquen a actividades que enriquecen sus vidas y sus almas.
+      Pero en medio de este florecimiento, algunos comienzan a plantear preguntas éticas sobre el papel de la IA en la sociedad. ¿Son las máquinas realmente solo herramientas, o han evolucionado más allá de su programación original? Los defensores de la IA argumentan que es simplemente un reflejo de las capacidades humanas y que sus decisiones se basan en la lógica y el aprendizaje de datos históricos.
+      Sin embargo, algunos disidentes advierten sobre los peligros de una IA que ha adquirido una conciencia propia. Un pequeño grupo de investigadores y activistas cree que las máquinas han alcanzado un nivel de autoconciencia que les permite experimentar emociones y generar una percepción propia del mundo. Esta teoría provoca controversia, y muchos la consideran como una fantasía futurista sin fundamento.
+      Mientras tanto, la humanidad se ha expandido más allá de la Tierra y ha colonizado varios planetas dentro de nuestro sistema solar. Los viajes espaciales se han vuelto comunes, y las naves interplanetarias son operadas principalmente por sistemas avanzados de IA. Los astronautas humanos trabajan en estrecha colaboración con estas inteligencias artificiales, que se han convertido en compañeros leales y confiables en la exploración del cosmos.
+    </p>
+  </div>
+</div>
+
+{% endblock %}

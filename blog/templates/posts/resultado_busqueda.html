@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block styles %}<link rel="stylesheet" href="{% static 'css/posts.css' %}">{% endblock %}
+
+{% block content %}
+    <div class="container posts-container" style="margin-bottom:100px; margin-top:150px">
+        {% if no_results %}
+           <h1 style="color:white;decoration:none"><p>No se encontraron resultados para "{{ query }}"</h1>
+        {% else %}
+            <h1 style="color:white;decoration:none">Resultados de búsqueda para "{{ query }}"</h1>
+        {% endif %}
+        <div style="margin-top: 20px;">
+            {% if no_results %}
+                {% for post in posts %}
+                    <div style="margin: 10px; text-align: center;">
+                        <a href="{% url 'apps.posts:post_individual' post.id %}">
+                            <div style="max-width: 400px;">
+                                <img class="img-post" src="{{ post.imagen.url }}" alt="" style="max-width: 100%; height: auto;">
+                                <p style="color: white;">{{ post.titulo }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% for post in posts %}
+                    <div style="margin: 10px; text-align: center;">
+                        <a href="{% url 'apps.posts:post_individual' post.id %}">
+                            <div style="max-width: 400px;">
+                                <img class="img-post" src="{{ post.imagen.url }}" alt="" style="max-width: 100%; height: auto;">
+                                <p style="color: white;">{{ post.titulo }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% empty %}
+                    <p>No hay posts disponibles.</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+

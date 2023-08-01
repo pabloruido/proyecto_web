@@ -1,0 +1,169 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/post.css' %}" />
+{% endblock %} 
+
+{% block content %}
+<div class="cuerpo">
+  <div class="containerpost">
+    <div class="card20">
+      <div class="contenidopost">
+        <h2
+          class="post-title"
+          style="
+            color: white;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+          "
+        >
+          {{ posts.titulo }}
+        </h2>
+        <figure>
+          <img src="{{ posts.imagen.url }}" alt="" />
+        </figure>
+        <h3 style="color: white; text-decoration: none">
+          {{ posts.subtitulo }}
+        </h3>
+        <p
+          class="justified-text"
+          style="color: secondary; text-decoration: none"
+        >
+          {{ posts.texto }}
+        </p>
+        <h5 style="color: white; text-decoration: none">
+          Categoria:{{ posts.categoria }}
+        </h5>
+        {% if puede_crear_post %}
+        <div>
+          <a href="{% url 'apps.posts:crear_post' %}" class="btn btn-primary"
+            >Crear Nuevo Post</a
+          >
+        </div>
+        {% endif %} {% if puede_editar_post %}
+        <div>
+          <a
+            href="{% url 'apps.posts:editar_post' posts.id %}"
+            class="btn btn-primary"
+            >Editar Post</a>
+          
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+<center>
+  <div class="container-fluid" style="margin-bottom: 50px">
+    <h1 style="color: white; text-decoration: none">Comentarios</h1>
+    <br /><br />
+  </div>
+
+  <div class="container-fluid" style="margin-bottom: 20px"></div>
+  {% for comentario in comentarios %}
+  <div class="comment-container card mb-3">
+    <div class="card-body">
+      <img
+        src="{{ comentario.usuario.imagen.url }}"
+        alt="{{ comentario.usuario.username }}"
+        class="profile-image"
+      />
+      <div class="comment-content">
+        <table>
+          <tr>
+            <td
+              style="color: rgb(19, 17, 17); text-decoration: none"
+              ;
+              class="comment-info"
+            >
+              {{ comentario.usuario }} - {{ comentario.fecha }}
+            </td>
+          </tr>
+        </table>
+        <p
+          style="color: rgb(19, 17, 17); text-decoration: none"
+          ;
+          class="comment-text"
+        >
+          {{ comentario.texto }}
+        </p>
+        {% if comentario.usuario == request.user %}
+        <a
+          style="color: red; text-decoration: none"
+          href="{% url 'apps.posts:comentario_editar' pk=comentario.pk %}"
+          >Editar</a
+        >
+        -
+        <a
+          style="color: red; text-decoration: none"
+          href="{% url 'apps.posts:comentario_eliminar' pk=comentario.pk %}"
+          >Eliminar</a
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <li style="color: white; text-decoration: none">
+    No hay comentarios - Realiza un comentario
+  </li>
+  {% endfor %}
+
+  <a id="comentario"></a>
+  <div class="container-fluid mt-3" style="margin-bottom: 200px">
+    <form method="POST" style="margin-bottom: 50px; margin-top: 50px">
+      {% csrf_token %} {% if user.is_authenticated %}
+      <a id="comentario1"></a>
+      <h2 style="color: white; text-decoration: none">Deja tu comentario</h2>
+      <form method="POST">
+        {% csrf_token %} {{ form.as_p }}
+        <input type="submit" value="Comentar" />
+      </form>
+      {% else %}
+      <h2>Debes iniciar sesión/registrarte para comentar</h2>
+      <a
+        class="btn btn-success btn-lg"
+        href="{% url 'apps.usuario:login' %}?next={{ request.path }}#comentario"
+        >Iniciar sesión</a
+      >
+      <a
+        class="btn btn-success btn-lg"
+        href="{% url 'apps.usuario:registro' %}?next={{ request.path }}#comentario"
+        >Registrarse</a
+      >
+      <input type="hidden" name="next" value="{{ request.path }}" />
+      {% endif %}
+    </form>
+  </div>
+  {% endblock %}
+
+  <div class="container" style="margin: 240px">
+    <div class="post">
+      <div style="text-align: center; font-style: italic">
+        <h1
+          class="post-title"
+          style="
+            color: #01fff4;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+          "
+        >
+          {{ posts.titulo }}
+        </h1>
+        <br />
+        <img src="{{ posts.imagen.url }}" alt="" />
+        <br />
+        <br />
+        <h2 style="color: white; text-decoration: none">
+          {{ posts.subtitulo }}
+        </h2>
+        <br />
+        <p class="justified-text" style="color: white; text-decoration: none">
+          {{ posts.texto }}
+        </p>
+      </div>
+      <br /><br />
+      <h5 style="color: white; text-decoration: none">{{ posts.categoria }}</h5>
+    </div>
+  </div>
+</center>
