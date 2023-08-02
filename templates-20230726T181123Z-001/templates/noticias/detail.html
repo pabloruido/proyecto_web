@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
+        <h1 class="mt-4">{{post.titulo}}</h1>
+        <p class="lead">
+          por 
+          <a href="#">{{post.user.username}}</a>
+        </p>
+        <hr>
+        <p>Escrito el {{post.fecha_creacion}}</p>
+        <hr>
+        <img class="img-fluid rounded" src="{{ post.imagen.url }}" alt="">
+        <hr>
+        <p class="lead">{{post.texto|safe}}</p>
+        <hr>
+        {% if post.user.is_authenticated %}
+        <div class="card my-4">
+          <h5 class="card-header">Deja un comentario:</h5>
+          <div class="card-body">
+            <form method="POST" action="{% url "posts:save_coment" %}">
+              {% csrf_token %}
+              <input type="hidden" name="post" value="{{post.id}}" />
+              <div class="form-group">
+                <textarea class="form-control" name="coment" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+          </div>
+        </div>
+        {% endif %}
+        {% for coment in comentarios %}
+        <div class="media mb-4">
+          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+          <div class="media-body">
+            <h5 class="mt-0">{{coment.user.username}}</h5>
+            {{coment.comentario}}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+{% endblock %}

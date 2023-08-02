@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="title1 my-4" style="color: white">Listado de Noticias</h1>
+      {% for post in posts %}
+      <div class="bg-secondary text-white card mb-4">
+        <a href="#!"
+          ><img class="card-img-top" src="{{post.imagen.url}}" alt="..."
+        /></a>
+        <div class="card-body">
+          <div class="small text-white">{{post.fecha_creacion}}</div>
+          <h2 class="card-title text-white">{{post.titulo}}</h2>
+          <p class="card-text">{{post.texto|safe|truncatechars:300}}</p>
+          <a href="{% url 'posts:detail' post.pk %}" class="btn btn-primary"
+            >Leer más &rarr;</a
+          >
+        </div>
+        <div class="card-footer text-white">
+          Escrito el {{post.fecha_creacion}} por
+          <a href="#" class="text-white"> {{post.user.username}}</a>
+        </div>
+      </div>
+      {% endfor %}
+      <ul class="pagination justify-content-center mb-4">
+        <li class="page-item">
+          <a class="page-link" href="#">&larr; Anterior</a>
+        </li>
+        <li class="page-item disabled">
+          <a class="page-link" href="#">Siguiente &rarr;</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
