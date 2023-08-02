@@ -13,5 +13,6 @@ urlpatterns = [
     path('crear/', views.crear_post, name='crear_post'),
     path('editar/<int:pk>/', views.editar_post, name='editar_post'),
     path('buscar/', views.buscar_post, name='buscar'),
+    path('eliminar/<int:pk>/', views.eliminar_post, name='eliminar_post'),
     
 ]

@@ -30,8 +30,7 @@
         <a style="color:white; text-decoration:none"href="{% url 'apps.posts:post_individual' i.id %}">
             <h1>{{ i.titulo }}</h1>
         </a>
-        </a>
-        <li class="text-white">{{ i.titulo }}</li>
+        </a>       
         <li class="text-white">{{ i.subtitulo }}</li>
         <li class="text-white"><a style="color:white; text-decoration:none" href="?categoria={{ i.categoria.id }}">{{ i.categoria }}</a></li>
         <li><a style="color:white;" href="{% url 'apps.posts:post_individual' i.id %}">Ir al Artículo</a></li>

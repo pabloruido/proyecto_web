@@ -19,6 +19,9 @@ def puede_postear(user):
 def puede_editar(user):
     return puede_postear(user)
 
+def puede_eliminar(user):
+    return puede_postear(user)
+
 class PostListView(ListView):
     model = Post
     template_name = "posts/posts.html"
@@ -98,6 +101,18 @@ def editar_post(request, pk):
 
     return render(request, 'posts/editar_post.html', {'form': form})
 
+@login_required
+@user_passes_test(puede_eliminar)
+def eliminar_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == "POST":
+        post.delete()
+        messages.success(request, 'El post se ha eliminado correctamente.')
+        return redirect('apps.posts:posts')
+
+    return render(request, 'posts/eliminar_post.html', {'post': post})
+
 
 class PostDetailView(DetailView):
     model = Post
@@ -113,6 +128,7 @@ class PostDetailView(DetailView):
 
         context['puede_crear_post'] = puede_postear(self.request.user)
         context['puede_editar_post'] = puede_editar(self.request.user)
+        context['puede_eliminar_post'] = puede_eliminar(self.request.user)
         return context
     
     def post (self, request, *args, **kwargs):

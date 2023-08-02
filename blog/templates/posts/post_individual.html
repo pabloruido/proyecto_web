@@ -31,24 +31,27 @@
         >
           {{ posts.texto }}
         </p>
-        <h5 style="color: white; text-decoration: none">
+        <h5 style="color: white; text-decoration: none; text-align: left;">
           Categoria:{{ posts.categoria }}
         </h5>
-        {% if puede_crear_post %}
-        <div>
-          <a href="{% url 'apps.posts:crear_post' %}" class="btn btn-primary"
-            >Crear Nuevo Post</a
-          >
+        <div class="d-flex justify-content-start">
+          {% if puede_crear_post %}
+          <div class="mr-5">
+            <a href="{% url 'apps.posts:crear_post' %}" class="btn btn-primary">Crear Nuevo Post</a>
+          </div>
+          {% endif %}
+        <br><br>
+          {% if puede_editar_post %}
+          <div class="mr-5">
+            <a href="{% url 'apps.posts:editar_post' posts.id %}" class="btn btn-primary">Editar Post</a>
+          </div>
+          {% endif %}
+          {% if puede_eliminar_post %}
+          <div>
+          <a href="{% url 'apps.posts:eliminar_post' posts.id %}" class="btn btn-danger">Eliminar Post</a>
+          </div>
+          {% endif %}
         </div>
-        {% endif %} {% if puede_editar_post %}
-        <div>
-          <a
-            href="{% url 'apps.posts:editar_post' posts.id %}"
-            class="btn btn-primary"
-            >Editar Post</a>
-          
-        </div>
-        {% endif %}
       </div>
     </div>
   </div>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+<div style="margin-top: 200px;">
+<title>Confirmar Eliminación</title>
+<h1 style="color: white; text-align: center; font-style: italic">Confirmar Eliminación</h1>
+   <h3 style="color: white; text-align: center; font-style: italic">
+    <p>¿Estás seguro de que deseas eliminar este post?</p></h3>
+    <form method="post" class="d-flex justify-content-center">
+        {% csrf_token %}
+        <input type="submit" value="Eliminar" class="btn btn-danger">
+        <a href="{% url 'apps.posts:posts' %}" class="btn btn-secondary ml-2">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
