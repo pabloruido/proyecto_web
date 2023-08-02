@@ -34,7 +34,7 @@
           <li><a href="{% url 'apps.posts:posts' %}">Articulos</a></li>
           <li><a href="{% url 'apps.contacto:contacto' %}">Contacto</a></li>
               {% if user.is_authenticated %}
-          <li><a href="{% url 'apps.usuario:logout' %}">Cerrar sesión</a></li>
+          <li><a href="{% url 'apps.usuario:logout' %}">{{ user.username }}: Cerrar sesión</a></li>
               {% else %}
           <li><a href="{% url 'apps.usuario:registro' %}">Registro</a></li>
           <li><a href="{% url 'apps.usuario:login' %}">Iniciar sesión</a></li>
