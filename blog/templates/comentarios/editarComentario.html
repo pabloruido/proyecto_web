@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-  <h1>Editar Comentario</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar cambios</button>
-  </form>
-  <a href="{% url 'apps.posts:post_individual' id=comentario.posts_id %}">Cancelar</a>
+<div style="display: flex; justify-content: center; align-items: center; height: 70vh;">
+  <div style="text-align: center;">
+    <h1 style="color: white; font-style: italic;">Editar Comentario</h1>
+    <form method="post" style="display: inline-block;">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Guardar cambios</button>
+    </form>
+    <a style="color: white; font-style: italic; display: block; margin-top: 10px;" href="{% url 'apps.posts:post_individual' id=comentario.posts_id %}">Cancelar</a>
+  </div>
+</div>
 {% endblock %}

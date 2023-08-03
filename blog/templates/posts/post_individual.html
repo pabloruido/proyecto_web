@@ -90,18 +90,12 @@
         >
           {{ comentario.texto }}
         </p>
-        {% if comentario.usuario == request.user %}
-        <a
-          style="color: red; text-decoration: none"
-          href="{% url 'apps.posts:comentario_editar' pk=comentario.pk %}"
-          >Editar</a
-        >
-        -
-        <a
-          style="color: red; text-decoration: none"
-          href="{% url 'apps.posts:comentario_eliminar' pk=comentario.pk %}"
-          >Eliminar</a
-        >
+
+
+
+        {% if comentario.usuario == request.user or request.user.is_superuser  %}
+        <a style="color: red; text-decoration: none" href="{% url 'apps.posts:comentario_editar' pk=comentario.pk %}">Editar</a> -
+        <a style="color: red; text-decoration: none" href="{% url 'apps.posts:comentario_eliminar' pk=comentario.pk %}">Eliminar</a>
         {% endif %}
       </div>
     </div>
@@ -112,6 +106,9 @@
   </li>
   {% endfor %}
 
+
+
+  
   <a id="comentario"></a>
   <div class="container-fluid mt-3" style="margin-bottom: 200px">
     <form method="POST" style="margin-bottom: 50px; margin-top: 50px">
@@ -139,34 +136,3 @@
     </form>
   </div>
   {% endblock %}
-
-  <div class="container" style="margin: 240px">
-    <div class="post">
-      <div style="text-align: center; font-style: italic">
-        <h1
-          class="post-title"
-          style="
-            color: #01fff4;
-            text-decoration: none;
-            font-family: Arial, sans-serif;
-          "
-        >
-          {{ posts.titulo }}
-        </h1>
-        <br />
-        <img src="{{ posts.imagen.url }}" alt="" />
-        <br />
-        <br />
-        <h2 style="color: white; text-decoration: none">
-          {{ posts.subtitulo }}
-        </h2>
-        <br />
-        <p class="justified-text" style="color: white; text-decoration: none">
-          {{ posts.texto }}
-        </p>
-      </div>
-      <br /><br />
-      <h5 style="color: white; text-decoration: none">{{ posts.categoria }}</h5>
-    </div>
-  </div>
-</center>

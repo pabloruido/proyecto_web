@@ -41,6 +41,7 @@ class Comentario(models.Model):
     def __str__(self):
         return self.texto
 
+    
 
 
 

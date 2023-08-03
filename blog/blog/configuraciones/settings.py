@@ -10,9 +10,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p&fvvx8hc@8v0^ih129hvm_i&b7bm1d64n9hf^0llox4*2krlz'
 
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['pabloruido2.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'usuario.Usuario'
 

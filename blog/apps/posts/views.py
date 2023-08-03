@@ -2,8 +2,8 @@ from typing import Any, Dict
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comentario, Categoria
 from .forms import ComentarioForm, PostForm
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.views.generic import ListView, DetailView, View
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
+from django.views.generic import ListView, DetailView, View, TemplateView
 from django.contrib import messages
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -12,15 +12,18 @@ from django.http import HttpResponseForbidden
 from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.db.models import Q
+from django.contrib.auth.models import User, Group
 
 def puede_postear(user):
-    return user.is_superuser or user.has_perm('posts.puede_crear_post')
+    return user.is_superuser or user.groups.filter(name='Colaborador').exists()
 
 def puede_editar(user):
-    return puede_postear(user)
+    return user.is_superuser or user.groups.filter(name='Colaborador').exists()
 
 def puede_eliminar(user):
-    return puede_postear(user)
+    return user.is_superuser or user.groups.filter(name='Colaborador').exists()
+
+
 
 class PostListView(ListView):
     model = Post
@@ -67,8 +70,10 @@ def crear_post(request):
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
-            nueva_categoria = form.cleaned_data.get('nueva_categoria', '')
-            if nueva_categoria:
+            nueva_categoria = form.cleaned_data.get('nueva_categoria', '').strip()
+            categoria_seleccionada = form.cleaned_data.get('categoria')
+            
+            if nueva_categoria and not categoria_seleccionada:
                 categoria_existente = Categoria.objects.filter(nombre=nueva_categoria).first()
                 if not categoria_existente:
                     nueva_categoria_obj = Categoria(nombre=nueva_categoria)
@@ -76,6 +81,7 @@ def crear_post(request):
                     form.instance.categoria = nueva_categoria_obj
                 else:
                     form.instance.categoria = categoria_existente
+
             post = form.save(commit=False)
             post.publicado = timezone.now()
             post.save()
@@ -83,8 +89,8 @@ def crear_post(request):
             return redirect('apps.posts:post_individual', id=post.id)
     else:
         form = PostForm()
+    
     return render(request, 'posts/crear_post.html', {'form': form})
-
 
 @login_required
 @user_passes_test(puede_editar)
@@ -165,6 +171,7 @@ class ComentarioCreateView(LoginRequiredMixin, CreateView):
     
 
 
+
 class ComentarioUpdateView(LoginRequiredMixin, UpdateView):
     model = Comentario
     form_class = ComentarioForm
@@ -176,12 +183,12 @@ class ComentarioUpdateView(LoginRequiredMixin, UpdateView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(usuario=self.request.user)
-    
+
 
 class ComentarioDeleteView(LoginRequiredMixin, DeleteView):
     model = Comentario
     template_name = 'comentarios/eliminarComentario.html'
-    
+
     def get_success_url(self):
         return reverse('apps.posts:post_individual', kwargs={'id': self.object.posts_id})
 
@@ -189,20 +196,6 @@ class ComentarioDeleteView(LoginRequiredMixin, DeleteView):
         queryset = super().get_queryset()
         return queryset.filter(usuario=self.request.user)
     
-from django.views.generic.edit import DeleteView
-
-class ComentarioDeleteView(LoginRequiredMixin, DeleteView):
-    model = Comentario
-    template_name = 'comentarios/eliminarComentario.html'
-    
-    def get_success_url(self):
-        return reverse('apps.posts:post_individual', kwargs={'id': self.object.posts_id})
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(usuario=self.request.user)
-    
-
 
 
 

@@ -8,7 +8,30 @@
     </span>
   </a>
 </div>
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/posts.css' %}">
 
+
+
+
+<div class="filters" style="margin-top:300px; margin-left:150px" >
+  <a class="btn btn-outline-info" href="posts/?categoria=">Todas las categorías</a>
+  {% for categoria in categorias %}
+      
+<a class="btn btn-outline-danger" href="posts/?categoria={{ categoria.id }}">{{ categoria.nombre }}</a>{% endfor %}
+
+  
+<a class="btn btn-outline-danger" href="posts/?antiguedad=asc">Más antiguas primero</a>
+<a class="btn btn-outline-warning" href="posts/?antiguedad=desc">Más recientes primero</a>
+
+<a class="btn btn-outline-success" href="posts/?alfabetico=asc">A-Z</a>
+<a class="btn btn-outline-light" href="posts/?alfabetico=desc">Z-A</a>
+
+</div>
+
+
+
+{% endblock %}
 <div id="section" class="Contenedor">
   <div class="card1">
     <div class="face front">

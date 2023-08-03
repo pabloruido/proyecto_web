@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Últimos Posts Creados</h1>
+{% for post in ultimos_posts %}
+    <div>
+        <h3>{{ post.titulo }}</h3>
+        <p>{{ post.texto }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

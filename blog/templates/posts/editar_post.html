@@ -9,7 +9,7 @@
 <div class="container" style="margin: 330px">
     <div class="post">
         <h1 style="color: white; text-align: center; font-style: italic">Editar Post</h1>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" class="d-flex justify-content-center">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
